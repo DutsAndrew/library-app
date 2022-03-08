@@ -29,13 +29,11 @@
                     <input type="number" class="input" id="pages" placeholder="# of pages" required maxlength="3000">
                     <p class ="error-msg" id="pages-error"></p>
 
-                    <input type="radio" class="input" id="read-it-yes" maxlength="50" value="yes">
-                    <label for="read-it">Yes</label>
-                    <p class ="error-msg" id="read-it-yes-error"></p>
-
-                    <input type="radio" class="input" id="read-it-no" maxlength="50" value="no">
-                    <label for="read-it">No</label>
-                    <p class ="error-msg" id="read-it-no-error"></p>
+                    <p class="have-i-read-it-text">Have I read this book yet?</p>
+                    <label class="switch" id="have-i-read-it">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label><br><br>
 
                     <button type="submit-book-form">Submit</button>
             </fieldset>
@@ -45,7 +43,14 @@
     <div class="page">
         <div class="book-library">
             <div class="book-cards" id="book-example">
-
+                <p class="title-of-book">The Hobbit</p>
+                <p class="author-of-book">J.R.R Tolkien</p>
+                <p class="pages-of-book">296 pages</p>
+                <p class="have-i-read-it-text">Have I read this book yet?</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
     </div>

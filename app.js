@@ -1,4 +1,4 @@
-const addNewBook = document.querySelector('.create-new-book');
+const createNewBook = document.querySelector('.create-new-book');
 const bookFormContainer = document.querySelector('.form-container');
 const submitBookForm = document.querySelector('.submit-book-form');
 const bookLibrary = document.querySelector('.book-library');
