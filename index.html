@@ -11,36 +11,42 @@
 <body>
     <div class="header" id="banner">
         <div class="header" id="banner-left"></div>
-        <div class="header" id="banner-right"></div>
+        <div class="header" id="banner-right">
+            <button class="create-new-book">+</button>
+        </div>
     </div>
 
     <div class="sidebar">
-        <fieldset>
-            <legend>Add new book to library</legend>
-                <input type="text" class="input" id="title" placeholder="Title" required maxlength="50">
-                <p class ="error-msg" id="title-error"></p>
+        <form class="form-container">
+            <fieldset>
+                <legend>Add new book to library</legend>
+                    <input type="text" class="input" id="title" placeholder="Title" required maxlength="50">
+                    <p class ="error-msg" id="title-error"></p>
 
-                <input type="text" class="input" id="author" placeholder="Author" required maxlength="50">
-                <p class ="error-msg" id="author-error"></p>
+                    <input type="text" class="input" id="author" placeholder="Author" required maxlength="50">
+                    <p class ="error-msg" id="author-error"></p>
 
-                <input type="number" class="input" id="pages" placeholder="# of pages" required maxlength="3000">
-                <p class ="error-msg" id="pages-error"></p>
+                    <input type="number" class="input" id="pages" placeholder="# of pages" required maxlength="3000">
+                    <p class ="error-msg" id="pages-error"></p>
 
-                <input type="checkbox" class="input" id="read-it-yes" maxlength="50" value="yes">
-                <label for="read-it-yes">Yes</label>
-                <p class ="error-msg" id="read-it-yes-error"></p>
+                    <input type="checkbox" class="input" id="read-it-yes" maxlength="50" value="yes">
+                    <label for="read-it-yes">Yes</label>
+                    <p class ="error-msg" id="read-it-yes-error"></p>
 
-                <input type="checkbox" class="input" id="read-it-no" maxlength="50" value="no">
-                <label for="read-it-yes">No</label>
-                <p class ="error-msg" id="read-it-no-error"></p>
+                    <input type="checkbox" class="input" id="read-it-no" maxlength="50" value="no">
+                    <label for="read-it-yes">No</label>
+                    <p class ="error-msg" id="read-it-no-error"></p>
 
-                <button type="submit">Submit</button>
-        </fieldset>
+                    <button type="submit-book-form">Submit</button>
+            </fieldset>
+        </form>
     </div>
 
     <div class="page">
         <div class="book-library">
-            <div class="book-cards" id="book-example"></div>
+            <div class="book-cards" id="book-example">
+
+            </div>
         </div>
     </div>
 </body>
