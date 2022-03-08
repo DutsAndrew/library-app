@@ -4,6 +4,12 @@ const submitBookForm = document.querySelector('.submit-book-form');
 const bookLibrary = document.querySelector('.book-library');
 const bookCards = document.querySelectorAll('.book-cards');
 
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const readItYes = document.querySelector('#read-it-yes');
+const readItNo = document.querySelector('#read-it-no');
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
