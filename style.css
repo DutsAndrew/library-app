@@ -6,7 +6,7 @@ html {
 
 body {
   display: grid;
-  grid-template: 0.5fr 1fr 1fr 0.5fr / 0.5fr 1fr 0.5fr;
+  grid-template: 0.5fr 1fr 2fr 0.2fr / 0.2fr 1fr 0.5fr;
 }
 
 /* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
@@ -16,14 +16,30 @@ body {
   grid-column: 1 / 4;
   grid-row: 1;
   height: minmax(0.5fr, 80px);
+  background-color: #175676;
 }
 
 #banner-left {
   grid-column: 1;
 }
 
+.header-text {
+  color: #CCE6F4;
+  font-size: 58px;
+  margin-left: 40px;
+}
+
 #banner-right {
   grid-column: 2;
+}
+
+.header-book-icon {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  justify-self: center;
+  align-self: center;
+  filter: invert(95%) sepia(64%) saturate(5579%) hue-rotate(175deg) brightness(106%) contrast(91%);
 }
 
 /* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */
@@ -32,22 +48,45 @@ body {
   display: grid;
   grid-row: 2 / 4;
   grid-column: 1;
-  width: 180px;
-  height: 50vh;
+  background-color: #4BA3C3;
+  height: 100vh;
+  grid-template: 0.10fr 1fr / 0.5fr;
 }
 
 .create-new-book {
   grid-column: 1;
-  grid-row: 2;
-  width: 40px;
+  grid-row: 1;
+  width: 150px;
   height: 40px;
   margin: 15px;
+  background-color: #CCE6F4;
+  box-shadow: 1px 1px black;
+  font-size: 16px;
 }
 
 .form-container {
+  margin-top: 10px;
   display: grid;
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 2;
+  font-size: 20px;
+  color: #CCE6F4;
+  font-weight: bold;
+}
+
+.input {
+  background-color: #CCE6F4;
+  height: 30px;
+  margin: 5px;
+}
+
+.legend-text {
+  color: #175676;
+  font-weight: bold;
+}
+
+.label-title {
+  color: #CCE6F4;
 }
 
 /* LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE */
@@ -56,10 +95,26 @@ body {
   display: grid;
   grid-row: 2 / 4;
   grid-column: 2 / 4;
+  background-color: #CCE6F4;
 }
 
 .book-library {
   display: grid;
+}
+
+.book-cards {
+  /* background-color: #4BA3C3; */
+}
+
+/* FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER */
+
+.footer {
+  grid-row: 4;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #175676;
 }
 
 /* SLIDER STYLING SLIDER STYLING SLIDER STYLING SLIDER STYLING SLIDER STYLING */

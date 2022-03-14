@@ -10,28 +10,32 @@
 </head>
 <body>
     <div class="header" id="banner">
-        <div class="header" id="banner-left"></div>
-        <div class="header" id="banner-right"></div>
+        <div class="header" id="banner-left">
+            <p class="header-text">Reading Library</p>
+        </div>
+        <div class="header" id="banner-right">
+            <img class="header-book-icon" src="./book-icon.svg">
+        </div>
     </div>
 
     <div class="sidebar">
-        <button class="create-new-book">+</button>
+        <button class="create-new-book">+ Add Book</button>
         <form class="form-container">
             <fieldset>
-                <legend>Add new book to library</legend>
-                    <label for="title">Title:</label>
+                <legend class="legend-text">Add new book to library</legend>
+                    <label for="title" class="label-title">Title:</label>
                     <input type="text" class="input" id="title" placeholder="Title" required maxlength="50">
                     <p class ="error-msg" id="title-error"></p>
 
-                    <label for="author">Author:</label>
+                    <label for="author" class="label-title">Author:</label>
                     <input type="text" class="input" id="author" placeholder="Author" required maxlength="50">
                     <p class ="error-msg" id="author-error"></p>
 
-                    <label for="pages">Pages:</label>
+                    <label for="pages" class="label-title">Pages:</label>
                     <input type="number" class="input" id="pages" placeholder="# of pages" required maxlength="3000">
                     <p class ="error-msg" id="pages-error"></p>
 
-                    <label for="have-i-read-it-form">Have I read this book yet?</label>
+                    <label for="have-i-read-it-text" class="label-title">Have I read this book yet?</label>
                     <label class="switch">
                         <input type="checkbox" class="have-i-read-it">
                         <span class="slider"></span>
@@ -55,6 +59,10 @@
                 </label>
             </div>
         </div>
+    </div>
+
+    <div class="footer">
+        <p class="copyright">AVD Creation through The Odin Project</p>
     </div>
 </body>
 </html>
