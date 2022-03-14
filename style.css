@@ -1,3 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
+
+html {
+  font-family: 'Fredoka', sans-serif;
+}
+
+body {
+  display: grid;
+  grid-template: 0.5fr 1fr 1fr 0.5fr / 0.5fr 1fr 0.5fr;
+}
+
+/* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
+
+.header {
+  display: grid;
+  grid-column: 1 / 4;
+  grid-row: 1;
+  height: minmax(0.5fr, 80px);
+}
+
+#banner-left {
+  grid-column: 1;
+}
+
+#banner-right {
+  grid-column: 2;
+}
+
+/* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */
+
+.sidebar {
+  display: grid;
+  grid-row: 2 / 4;
+  grid-column: 1;
+  width: 180px;
+  height: 50vh;
+}
+
+.create-new-book {
+  grid-column: 1;
+  grid-row: 2;
+  width: 40px;
+  height: 40px;
+  margin: 15px;
+}
+
+.form-container {
+  display: grid;
+  grid-column: 1;
+  grid-row: 3;
+}
+
+/* LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE */
+
+.page {
+  display: grid;
+  grid-row: 2 / 4;
+  grid-column: 2 / 4;
+}
+
+.book-library {
+  display: grid;
+}
+
+/* SLIDER STYLING SLIDER STYLING SLIDER STYLING SLIDER STYLING SLIDER STYLING */
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
