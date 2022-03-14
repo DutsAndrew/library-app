@@ -66,7 +66,7 @@ body {
 
 .form-container {
   margin-top: 10px;
-  display: grid;
+  display: none;
   grid-column: 1;
   grid-row: 2;
   font-size: 20px;
@@ -100,10 +100,12 @@ body {
 
 .book-library {
   display: grid;
+  
 }
 
 .book-cards {
   /* background-color: #4BA3C3; */
+  width: minmax(1fr, 100px);
 }
 
 /* FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER */

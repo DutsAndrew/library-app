@@ -1,5 +1,4 @@
-const createNewBook = document.querySelector('.create-new-book');
-const bookFormContainer = document.querySelector('.form-container');
+const createNewBook = document.getElementById('.create-new-book');
 const submitBookForm = document.querySelector('.submit-book-form');
 const bookLibrary = document.querySelector('.book-library');
 const bookCards = document.querySelectorAll('.book-cards');
@@ -11,12 +10,18 @@ const pages = document.querySelector('#pages').value;
 const haveIReadIt = document.querySelector('.have-i-read-it').value;
 const slider = document.querySelector('.slider').value;
 
-function openForm() {
-    document.getElementById("form").style.display = "block";
+let bookFormContainer = document.getElementById('.form-container');
+
+function toggle() {
+  if(bookFormContainer.content.display = "none") {
+    bookFormContainer.content.display = "grid";
+  } else if (bookFormContainer.display.content = "grid") {
+    bookFormContainer.display.content = "none";
+  } else {
+    bookFormContainer.display.content = "none";
   }
-  function closeForm() {
-    document.getElementById("form").style.display = "none";
-  }
+}
+    
 
 let myLibrary = [];
 
@@ -41,3 +46,4 @@ addBookToLibrary('The Lightning Thief', 'Rick Riordan', 333);
 addBookToLibrary('The Lightning Thief', 'Rick Riordan', 333);
 
 form.addEventListener('submit', addBookToLibrary);
+createNewBook.addEventListener('click', toggle);
