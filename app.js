@@ -13,22 +13,22 @@ const slider = document.querySelector('.slider').value;
 
 
 // toggle function to handle opening the "add new book" form and to close the same form if no new book is added
-let toggleOn = false;
+let toggleFormOn = false;
 
-const toggle = function() {
-  if (toggleOn === true) {
+const toggleBookForm = function() {
+  if (toggleFormOn === true) {
       bookForm.style.display = "none";
       addBookButton.textContent = "+ Add Book";
       addBookButton.style.backgroundColor = "#CCE6F4";
-      toggleOn = false;
+      toggleFormOn = false;
       console.log("the book form has disappeared");
   } 
   
-  else if (toggleOn === false) {
+  else if (toggleFormOn === false) {
       bookForm.style.display = "grid";
       addBookButton.textContent = "X Close";
       addBookButton.style.backgroundColor = "red";
-      toggleOn = true;
+      toggleFormOn = true;
       console.log("the book form is now open");
   }
 }
@@ -57,4 +57,4 @@ addBookToLibrary('The Lightning Thief', 'Rick Riordan', 333);
 addBookToLibrary('The Lightning Thief', 'Rick Riordan', 333);
 
 form.addEventListener('submit', addBookToLibrary);
-addBookButton.addEventListener('click', toggle);
+addBookButton.addEventListener('click', toggleBookForm);
