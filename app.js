@@ -11,11 +11,23 @@ const pages = document.querySelector('#pages').value;
 const haveIReadIt = document.querySelector('.have-i-read-it').value;
 const slider = document.querySelector('.slider').value;
 
+let toggleOn = false;
+
 const toggle = function() {
-  if(bookForm.style.display = "none") {
-    bookForm.style.display = "grid";
-  } else {
-    bookForm.style.display = "grid";
+  if (toggleOn === true) {
+      bookForm.style.display = "none";
+      addBookButton.textContent = "+ Add Book";
+      addBookButton.style.backgroundColor = "#CCE6F4";
+      toggleOn = false;
+      console.log("the book form has disappeared");
+  } 
+  
+  else if (toggleOn === false) {
+      bookForm.style.display = "grid";
+      addBookButton.textContent = "X Close";
+      addBookButton.style.backgroundColor = "red";
+      toggleOn = true;
+      console.log("the book form is now open");
   }
 }
     
