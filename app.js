@@ -11,6 +11,8 @@ const pages = document.querySelector('#pages').value;
 const haveIReadIt = document.querySelector('.have-i-read-it').value;
 const slider = document.querySelector('.slider').value;
 
+
+// toggle function to handle opening the "add new book" form and to close the same form if no new book is added
 let toggleOn = false;
 
 const toggle = function() {

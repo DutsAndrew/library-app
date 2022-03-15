@@ -100,12 +100,20 @@ body {
 
 .book-library {
   display: grid;
-  
+  margin: 20px;
+  margin-left: 30px;
+  gap: 15px;
 }
 
 .book-cards {
   /* background-color: #4BA3C3; */
   width: minmax(1fr, 100px);
+  height: minmax(1fr, 25px);
+}
+
+.card-info {
+  width: 100px;
+  height: 25px;
 }
 
 /* FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER */
@@ -117,6 +125,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #175676;
+  color: #CCE6F4;
 }
 
 /* SLIDER STYLING SLIDER STYLING SLIDER STYLING SLIDER STYLING SLIDER STYLING */
