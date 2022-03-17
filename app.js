@@ -51,14 +51,17 @@ function addBookToLibrary() {
 
     if (titleEntry.length == 0 || authorEntry.length == 0 || pagesEntry.length == 0) {
         input.value = "Empty";
-        alert("You left either your title, author, or pages entry blank, please try again");
+        bookForm.reset();
+        alert("You left either your title, author, or pages entry blank, please try again"); 
         return;
     } else if (isNaN(pagesEntry) || pagesEntry < 1 || pagesEntry > 3000) {
         input.value = "Empty";
+        bookForm.reset();
         alert("Your # of pages of entry is invalid");
         return;
     } else if (authorEntry.length > 50|| titleEntry.length > 50) {
         input.value = "Empty";
+        bookForm.reset();
         alert("Your author or title entry is too long, please try again");
         return;
     }
