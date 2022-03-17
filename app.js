@@ -19,6 +19,7 @@ const toggleBookForm = function() {
       bookForm.style.display = "none";
       addBookButton.textContent = "+ Add Book";
       addBookButton.style.backgroundColor = "#CCE6F4";
+      addBookButton.style.removeProperty('margin');
       toggleFormOn = false;
       console.log("the book form has disappeared");
   } 
@@ -27,6 +28,7 @@ const toggleBookForm = function() {
       bookForm.style.display = "grid";
       addBookButton.textContent = "X Close";
       addBookButton.style.backgroundColor = "red";
+      addBookButton.style.margin = "auto";
       toggleFormOn = true;
       console.log("the book form is now open");
   }
@@ -45,9 +47,9 @@ function Book(title, author, pages) {
 }
 
 function addBookToLibrary() {
-    let titleEntry = bookForm.elements.title.value;
-    let authorEntry = bookForm.elements.author.value;
-    let pagesEntry = bookForm.elements.pages.value;
+    let titleEntry = document.getElementById("title").value;
+    let authorEntry = document.getElementById("author").value;
+    let pagesEntry = document.getElementById("pages").value;
 
     let newBook = new Book(titleEntry, authorEntry, pagesEntry);
 

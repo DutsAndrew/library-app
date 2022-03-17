@@ -89,6 +89,18 @@ body {
   color: #CCE6F4;
 }
 
+.submit-book-form {
+  width: 120px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: #175676;
+  color: #CCE6F4;
+  font-size: 0.9rem;
+}
+
 /* LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE  LIBRARY PAGE */
 
 .page {
