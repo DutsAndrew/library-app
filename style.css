@@ -45,12 +45,15 @@ body {
 /* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */
 
 .sidebar {
-  display: grid;
+  display: flex;
   grid-row: 2 / 4;
   grid-column: 1;
   background-color: #4BA3C3;
   height: 100vh;
   grid-template: 0.10fr 1fr / 0.5fr;
+  flex-flow: column wrap;
+  justify-items: flex-start;
+  align-items: center;
 }
 
 .create-new-book {

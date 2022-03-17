@@ -19,7 +19,6 @@ const toggleBookForm = function() {
       bookForm.style.display = "none";
       addBookButton.textContent = "+ Add Book";
       addBookButton.style.backgroundColor = "#CCE6F4";
-      addBookButton.style.removeProperty('margin');
       toggleFormOn = false;
       console.log("the book form has disappeared");
   } 
@@ -28,7 +27,6 @@ const toggleBookForm = function() {
       bookForm.style.display = "grid";
       addBookButton.textContent = "X Close";
       addBookButton.style.backgroundColor = "red";
-      addBookButton.style.margin = "auto";
       toggleFormOn = true;
       console.log("the book form is now open");
   }
