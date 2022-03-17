@@ -96,7 +96,6 @@ body {
   grid-row: 2 / 4;
   grid-column: 2 / 4;
   background-color: #CCE6F4;
-  grid-template: repeat(4, 0.5fr) / repeat(4, 0.5fr);
   grid-auto-flow: column;
   grid-auto-rows: 0.5fr;
   overflow-x: hidden;
@@ -104,16 +103,25 @@ body {
 }
 
 .book-library {
-  display: grid;
+  display: flex;
   grid-row: 1 / 5;
   grid-column: 1 / 5;
   margin: 20px;
+  grid-template: repeat(4, 0.5fr) / repeat(4, 0.5fr);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .book-cards {
-  display: grid;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
   width: minmax(1fr, 100px);
   height: minmax(1fr, 25px);
+  grid-row: 1 / 5;
+  grid-column: 1 / 5;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .card-info {

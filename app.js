@@ -3,13 +3,12 @@ const addBookButton = document.querySelector('.create-new-book');
 const submitBookForm = document.querySelector('.submit-book-form');
 const bookLibrary = document.querySelector('.book-library');
 const bookCards = document.querySelectorAll('.book-cards');
-const form = document.querySelector('.form-container');
 
 const title = document.querySelector('#title').value;
 const author = document.querySelector('#author').value;
 const pages = document.querySelector('#pages').value;
-const haveIReadIt = document.querySelector('.have-i-read-it').value;
-const slider = document.querySelector('.slider').value;
+const sliderOn = document.querySelector('.slider').style.backgroundColor = "#2196F3";
+const sliderOff = document.querySelector('.slider').style.backgroundColor = "red";
 
 
 // toggle function to handle opening the "add new book" form and to close the same form if no new book is added
@@ -46,15 +45,15 @@ function Book(title, author, pages) {
 }
 
 function addBookToLibrary() {
-    const book = new Book();
+    let titleEntry = bookForm.elements.title.value;
+    let authorEntry = bookForm.elements.author.value;
+    let pagesEntry = bookForm.elements.pages.value;
 
-    myLibrary.push(book);
+    let newBook = new Book(titleEntry, authorEntry, pagesEntry);
+
+    myLibrary.push(newBook);
+    console.log(myLibrary);
 }
 
-
-
-addBookToLibrary('The Lightning Thief', 'Rick Riordan', 333);
-addBookToLibrary('The Lightning Thief', 'Rick Riordan', 333);
-
-form.addEventListener('submit', addBookToLibrary);
+submitBookForm.addEventListener('click', addBookToLibrary);
 addBookButton.addEventListener('click', toggleBookForm);
