@@ -9,6 +9,7 @@ const author = document.querySelector('#author').value;
 const pages = document.querySelector('#pages').value;
 const sliderOn = document.querySelector('.slider').style.backgroundColor = "#2196F3";
 const sliderOff = document.querySelector('.slider').style.backgroundColor = "red";
+const deleteBookButton = document.querySelector('.delete-book-button');
 
 
 // toggle function to handle opening the "add new book" form and to close the same form if no new book is added
@@ -77,8 +78,13 @@ function addBookToLibrary() {
 };
 
 function createBookCard(newBook) {
-    
+
+}
+
+function deleteBook() {
+
 }
 
 submitBookForm.addEventListener('click', addBookToLibrary);
 addBookButton.addEventListener('click', toggleBookForm);
+deleteBookButton.addEventListener('click', deleteBook);
