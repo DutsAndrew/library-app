@@ -155,10 +155,20 @@ body {
   border-radius: 10px;
   box-shadow: 0.5px 0.5px 0.5px 0.5px #175676;
   display: grid;
-  flex-flow: column;
   justify-content: center;
   align-items: center;
   padding-bottom: 15px;
+}
+
+.delete-book-button {
+  background-color: #CCE6F4;
+  color: #175676;
+  border-radius: 50%;
+  grid-row: 1;
+  justify-self: end;
+  align-items: center;
+  margin-top: 10px;
+  position: relative;
 }
 
 /* FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER */

@@ -32,6 +32,8 @@ const toggleBookForm = function() {
   }
 }
 
+
+// Library array to hold all books and constructor function to easily create and store new book information
 let myLibrary = [];
 
 function Book(title, author, pages) {
@@ -43,6 +45,7 @@ function Book(title, author, pages) {
     };
 }
 
+// Function to check that entries are valid, if they pass validations they are added to the library array
 function addBookToLibrary() {
     let titleEntry = document.getElementById("title").value;
     let authorEntry = document.getElementById("author").value;
@@ -54,15 +57,15 @@ function addBookToLibrary() {
         bookForm.reset();
         alert("You left either your title, author, or pages entry blank, please try again"); 
         return;
+    } else if (authorEntry.length > 50 || titleEntry.length > 50) {
+        input.value = "Empty";
+        bookForm.reset();
+        alert("Your author or title entry is too long, please try again");
+        return;
     } else if (isNaN(pagesEntry) || pagesEntry < 1 || pagesEntry > 3000) {
         input.value = "Empty";
         bookForm.reset();
         alert("Your # of pages of entry is invalid");
-        return;
-    } else if (authorEntry.length > 50|| titleEntry.length > 50) {
-        input.value = "Empty";
-        bookForm.reset();
-        alert("Your author or title entry is too long, please try again");
         return;
     }
 
@@ -70,7 +73,12 @@ function addBookToLibrary() {
 
     myLibrary.push(newBook);
     console.log(myLibrary);
+    createBookCard(newBook);
 };
+
+function createBookCard(newBook) {
+    
+}
 
 submitBookForm.addEventListener('click', addBookToLibrary);
 addBookButton.addEventListener('click', toggleBookForm);
