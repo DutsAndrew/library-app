@@ -24,15 +24,15 @@
             <fieldset>
                 <legend class="legend-text">Add new book to library</legend>
                     <label for="title" class="label-title">Title:</label>
-                    <input type="text" class="input" id="title" placeholder="Title" required maxlength="50" minlength="3">
+                    <input type="text" class="input" id="title" placeholder="Title" maxlength="50" minlength="3" required>
                     <p class ="error-msg" id="title-error"></p>
 
                     <label for="author" class="label-title">Author:</label>
-                    <input type="text" class="input" id="author" placeholder="Author" required maxlength="50" minlength="5">
+                    <input type="text" class="input" id="author" placeholder="Author" maxlength="50" minlength="5" required>
                     <p class ="error-msg" id="author-error"></p>
 
                     <label for="pages" class="label-title">Pages:</label>
-                    <input type="number" class="input" id="pages" placeholder="# of pages" required maxlength="3000" minlength="25" >
+                    <input type="number" class="input" id="pages" placeholder="# of pages" maxlength="3000" minlength="25" required>
                     <p class ="error-msg" id="pages-error"></p>
 
                     <input type="button" name="submit" class="submit-book-form" value="Add Book">

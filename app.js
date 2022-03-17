@@ -48,12 +48,18 @@ function addBookToLibrary() {
     let titleEntry = document.getElementById("title").value;
     let authorEntry = document.getElementById("author").value;
     let pagesEntry = document.getElementById("pages").value;
+    let input = document.getElementsByClassName("input");
+
+    if (titleEntry.length == 0 || authorEntry.length == 0 || pagesEntry.length == 0) {
+        input.value = "Empty";
+        return;
+    }
 
     let newBook = new Book(titleEntry, authorEntry, pagesEntry);
 
     myLibrary.push(newBook);
     console.log(myLibrary);
-}
+};
 
 submitBookForm.addEventListener('click', addBookToLibrary);
 addBookButton.addEventListener('click', toggleBookForm);
