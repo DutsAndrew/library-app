@@ -11,11 +11,7 @@ const title = document.querySelector('#title').value;
 const author = document.querySelector('#author').value;
 const pages = document.querySelector('#pages').value;
 
-const sliderSwitch = document.querySelector('.switch');
-const sliderInput = document.querySelector('.have-i-read-it');
-const sliderSpan = document.querySelector('.slider');
-const sliderOn = document.querySelector('.slider').style.backgroundColor = "#2196F3";
-const sliderOff = document.querySelector('.slider').style.backgroundColor = "red";
+const readItButton = document.querySelector('.read-it');
 
 const deleteBookButton = document.querySelector('.delete-book-button');
 
@@ -78,46 +74,58 @@ function addBookToLibrary() {
         return;
     }
 
+    findDuplicates();
     let newBook = new Book(titleEntry, authorEntry, pagesEntry);
 
     myLibrary.push(newBook);
     console.log(myLibrary);
     createBookCard(titleEntry, authorEntry, pagesEntry);
+    bookForm.reset();
 };
 
 
 //function to create the auto-polulation of book cards as they are added and validated
 function createBookCard(titleEntry, authorEntry, pagesEntry) {
+    
     const bookDiv = document.createElement("div");
     const titleEl = document.createElement("p");
     const authorEl = document.createElement("p");
     const pagesEl = document.createElement("p");
-    // const readItLabel = document.createElement("label");
-    // const readItInput = document.createElement("checkbox");
-    // const readItSlider = document.createElement("slider");
 
     titleEl.textContent = titleEntry;
     authorEl.textContent = authorEntry;
     pagesEl.textContent = pagesEntry;
 
     bookDiv.classList.add("book");
+
     titleEl.classList.add("card-info");
     authorEl.classList.add("card-info");
     pagesEl.classList.add("card-info");
-    bookDiv.classList.add("bookDiv");
-    // readItLabel.classList.add("switch");
-    // readItInput.classList.add("have-i-read-it");
-    // readItSlider.classList.add("slider");
 
     bookDiv.appendChild(titleEl);
     bookDiv.appendChild(authorEl);
     bookDiv.appendChild(pagesEl);
-    // bookDiv.appendChild(readItLabel);
-    // bookDiv.appendChild(readItInput);
-    // bookDiv.appendChild(readItSlider);
+
     bookCards.appendChild(bookDiv);
     bookLibrary.appendChild(bookCards);
     page.appendChild(bookLibrary);
+}
+
+// function to toggle have I read it status
+let readStatus = true;
+
+function toggleReadStatus() {
+    if (readStatus === true) {
+        readItButton.style.backgroundColor = "#CCE6F4";
+        readItButton.style.color = "#175676";
+        readItButton.textContent = "No";
+        readStatus = false;
+    } else if (readStatus === false) {
+        readItButton.style.backgroundColor = "#175676";
+        readItButton.style.color = "#CCE6F4";
+        readItButton.textContent = "Yes";
+        readStatus = true;
+    }
 }
 
 // function to delete the books when the x button is clicked at the top right
@@ -127,4 +135,5 @@ function deleteBook() {
 
 submitBookForm.addEventListener('click', addBookToLibrary);
 addBookButton.addEventListener('click', toggleBookForm);
+readItButton.addEventListener('click', toggleReadStatus);
 deleteBookButton.addEventListener('click', deleteBook);
