@@ -74,7 +74,6 @@ function addBookToLibrary() {
         return;
     }
 
-    findDuplicates();
     let newBook = new Book(titleEntry, authorEntry, pagesEntry);
 
     myLibrary.push(newBook);
@@ -92,19 +91,31 @@ function createBookCard(titleEntry, authorEntry, pagesEntry) {
     const authorEl = document.createElement("p");
     const pagesEl = document.createElement("p");
 
+    const readItText = document.createElement("p");
+    const readItButton = document.createElement("button");
+    const deleteBookButton = document.createElement("button");
+
     titleEl.textContent = titleEntry;
     authorEl.textContent = authorEntry;
     pagesEl.textContent = pagesEntry;
+    readItText.textContent = "Have I read this book yet?";
+    readItButton.textContent = "Yes";
+    deleteBookButton.textContent = "X";
 
     bookDiv.classList.add("book");
-
     titleEl.classList.add("card-info");
     authorEl.classList.add("card-info");
     pagesEl.classList.add("card-info");
+    readItText.classList.add("card-info");
+    readItButton.classList.add("read-it");
+    deleteBookButton.classList.add("delete-book-button");
 
     bookDiv.appendChild(titleEl);
     bookDiv.appendChild(authorEl);
     bookDiv.appendChild(pagesEl);
+    bookDiv.appendChild(readItText);
+    bookDiv.appendChild(readItButton);
+    bookDiv.appendChild(deleteBookButton);
 
     bookCards.appendChild(bookDiv);
     bookLibrary.appendChild(bookCards);
@@ -115,6 +126,7 @@ function createBookCard(titleEntry, authorEntry, pagesEntry) {
 let readStatus = true;
 
 function toggleReadStatus() {
+    console.log("have-i-read-it is toggled");
     if (readStatus === true) {
         readItButton.style.backgroundColor = "#CCE6F4";
         readItButton.style.color = "#175676";
