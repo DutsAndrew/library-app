@@ -1,14 +1,22 @@
 const bookForm = document.querySelector('.form-container');
 const addBookButton = document.querySelector('.create-new-book');
 const submitBookForm = document.querySelector('.submit-book-form');
+
+const page = document.querySelector('.page');
 const bookLibrary = document.querySelector('.book-library');
-const bookCards = document.querySelectorAll('.book-cards');
+const bookCards = document.querySelector('.book-cards');
+const bookDiv = document.querySelector(".book");
 
 const title = document.querySelector('#title').value;
 const author = document.querySelector('#author').value;
 const pages = document.querySelector('#pages').value;
+
+const sliderSwitch = document.querySelector('.switch');
+const sliderInput = document.querySelector('.have-i-read-it');
+const sliderSpan = document.querySelector('.slider');
 const sliderOn = document.querySelector('.slider').style.backgroundColor = "#2196F3";
 const sliderOff = document.querySelector('.slider').style.backgroundColor = "red";
+
 const deleteBookButton = document.querySelector('.delete-book-button');
 
 
@@ -74,13 +82,45 @@ function addBookToLibrary() {
 
     myLibrary.push(newBook);
     console.log(myLibrary);
-    createBookCard(newBook);
+    createBookCard(titleEntry, authorEntry, pagesEntry);
 };
 
-function createBookCard(newBook) {
 
+//function to create the auto-polulation of book cards as they are added and validated
+function createBookCard(titleEntry, authorEntry, pagesEntry) {
+    const bookDiv = document.createElement("div");
+    const titleEl = document.createElement("p");
+    const authorEl = document.createElement("p");
+    const pagesEl = document.createElement("p");
+    // const readItLabel = document.createElement("label");
+    // const readItInput = document.createElement("checkbox");
+    // const readItSlider = document.createElement("slider");
+
+    titleEl.textContent = titleEntry;
+    authorEl.textContent = authorEntry;
+    pagesEl.textContent = pagesEntry;
+
+    bookDiv.classList.add("book");
+    titleEl.classList.add("card-info");
+    authorEl.classList.add("card-info");
+    pagesEl.classList.add("card-info");
+    bookDiv.classList.add("bookDiv");
+    // readItLabel.classList.add("switch");
+    // readItInput.classList.add("have-i-read-it");
+    // readItSlider.classList.add("slider");
+
+    bookDiv.appendChild(titleEl);
+    bookDiv.appendChild(authorEl);
+    bookDiv.appendChild(pagesEl);
+    // bookDiv.appendChild(readItLabel);
+    // bookDiv.appendChild(readItInput);
+    // bookDiv.appendChild(readItSlider);
+    bookCards.appendChild(bookDiv);
+    bookLibrary.appendChild(bookCards);
+    page.appendChild(bookLibrary);
 }
 
+// function to delete the books when the x button is clicked at the top right
 function deleteBook() {
 
 }
