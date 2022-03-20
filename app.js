@@ -85,7 +85,7 @@ function addBookToLibrary() {
 
 //function to create the auto-polulation of book cards as they are added and validated
 function createBookCard(titleEntry, authorEntry, pagesEntry) {
-    
+
     const bookDiv = document.createElement("div");
     const titleEl = document.createElement("p");
     const authorEl = document.createElement("p");
@@ -120,13 +120,30 @@ function createBookCard(titleEntry, authorEntry, pagesEntry) {
     bookCards.appendChild(bookDiv);
     bookLibrary.appendChild(bookCards);
     page.appendChild(bookLibrary);
-}
+
+    readItButton.addEventListener('click', function() {
+        if (readStatus === true) {
+            readItButton.style.backgroundColor = "#CCE6F4";
+            readItButton.style.color = "#175676";
+            readItButton.textContent = "No";
+            readStatus = false;
+        } else if (readStatus === false) {
+            readItButton.style.backgroundColor = "#175676";
+            readItButton.style.color = "#CCE6F4";
+            readItButton.textContent = "Yes";
+            readStatus = true;
+        }
+    });
+};
 
 // function to toggle have I read it status
-let readStatus = true;
+if (readItButton.textContent = "Yes") {
+    readStatus = true;
+} else if (readItButton.textContent = "No") {
+    readStatus = false;
+}
 
 function toggleReadStatus() {
-    console.log("have-i-read-it is toggled");
     if (readStatus === true) {
         readItButton.style.backgroundColor = "#CCE6F4";
         readItButton.style.color = "#175676";
@@ -138,7 +155,7 @@ function toggleReadStatus() {
         readItButton.textContent = "Yes";
         readStatus = true;
     }
-}
+};
 
 // function to delete the books when the x button is clicked at the top right
 function deleteBook() {
