@@ -37,6 +37,31 @@ const toggleBookForm = function() {
   }
 }
 
+// function to toggle have I read it status
+if (readItButton.textContent = "Yes") {
+    readStatus = true;
+} else if (readItButton.textContent = "No") {
+    readStatus = false;
+}
+
+function toggleReadStatus() {
+    if (readStatus === true) {
+        readItButton.style.backgroundColor = "#CCE6F4";
+        readItButton.style.color = "#175676";
+        readItButton.textContent = "No";
+        readStatus = false;
+    } else if (readStatus === false) {
+        readItButton.style.backgroundColor = "#175676";
+        readItButton.style.color = "#CCE6F4";
+        readItButton.textContent = "Yes";
+        readStatus = true;
+    }
+};
+
+// function to delete the books when the x button is clicked at the top right
+function deleteBook() {
+    this.parentElement.remove();
+}
 
 // Library array to hold all books and constructor function to easily create and store new book information
 let myLibrary = [];
@@ -134,33 +159,11 @@ function createBookCard(titleEntry, authorEntry, pagesEntry) {
             readStatus = true;
         }
     });
+
+    deleteBookButton.addEventListener('click', function() {
+        this.parentElement.remove();
+    });
 };
-
-// function to toggle have I read it status
-if (readItButton.textContent = "Yes") {
-    readStatus = true;
-} else if (readItButton.textContent = "No") {
-    readStatus = false;
-}
-
-function toggleReadStatus() {
-    if (readStatus === true) {
-        readItButton.style.backgroundColor = "#CCE6F4";
-        readItButton.style.color = "#175676";
-        readItButton.textContent = "No";
-        readStatus = false;
-    } else if (readStatus === false) {
-        readItButton.style.backgroundColor = "#175676";
-        readItButton.style.color = "#CCE6F4";
-        readItButton.textContent = "Yes";
-        readStatus = true;
-    }
-};
-
-// function to delete the books when the x button is clicked at the top right
-function deleteBook() {
-
-}
 
 submitBookForm.addEventListener('click', addBookToLibrary);
 addBookButton.addEventListener('click', toggleBookForm);
