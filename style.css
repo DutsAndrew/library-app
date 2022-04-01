@@ -56,6 +56,7 @@ body {
   align-items: center;
   overflow-x: hidden;
   overflow-y: scroll;
+  width: 200px;
 }
 
 .create-new-book {
