@@ -2,18 +2,10 @@
     const bookForm = document.querySelector('.form-container');
     const addBookButton = document.querySelector('.create-new-book');
     const submitBookForm = document.querySelector('.submit-book-form');
-
     const page = document.querySelector('.page');
     const bookLibrary = document.querySelector('.book-library');
     const bookCards = document.querySelector('.book-cards');
-    const bookDiv = document.querySelector(".book");
-
-    const title = document.querySelector('#title').value;
-    const author = document.querySelector('#author').value;
-    const pages = document.querySelector('#pages').value;
-
     const readItButton = document.querySelector('.read-it');
-
     const deleteBookButton = document.querySelector('.delete-book-button');
 
 
@@ -39,13 +31,13 @@
     }
 
     // function to toggle have I read it status
-    if (readItButton.textContent = "Yes") {
-        readStatus = true;
-    } else if (readItButton.textContent = "No") {
-        readStatus = false;
-    }
-
     function toggleReadStatus() {
+        if (readItButton.textContent = "Yes") {
+            readStatus = true;
+        } else if (readItButton.textContent = "No") {
+            readStatus = false;
+        }
+        
         if (readStatus === true) {
             readItButton.style.backgroundColor = "#CCE6F4";
             readItButton.style.color = "#175676";
