@@ -13,21 +13,21 @@
     let toggleFormOn = false;
 
     const toggleBookForm = function() {
-    if (toggleFormOn === true) {
-        bookForm.style.display = "none";
-        addBookButton.textContent = "+ Add Book";
-        addBookButton.style.backgroundColor = "#CCE6F4";
-        toggleFormOn = false;
-        console.log("the book form has disappeared");
-    } 
-    
-    else if (toggleFormOn === false) {
-        bookForm.style.display = "grid";
-        addBookButton.textContent = "X Close";
-        addBookButton.style.backgroundColor = "red";
-        toggleFormOn = true;
-        console.log("the book form is now open");
-    }
+        if (toggleFormOn === true) {
+            bookForm.style.display = "none";
+            addBookButton.textContent = "+ Add Book";
+            addBookButton.style.backgroundColor = "#CCE6F4";
+            toggleFormOn = false;
+            console.log("the book form has disappeared");
+        } 
+        
+        else if (toggleFormOn === false) {
+            bookForm.style.display = "grid";
+            addBookButton.textContent = "X Close";
+            addBookButton.style.backgroundColor = "red";
+            toggleFormOn = true;
+            console.log("the book form is now open");
+        }
     }
 
     // function to toggle have I read it status
