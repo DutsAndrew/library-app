@@ -1,5 +1,7 @@
 (function bookLibrary() {
-    const bookForm = document.querySelector('.form-container');
+
+    // variables for book library functionality
+    const bookForm = document.querySelector('#book-form');
     const addBookButton = document.querySelector('.create-new-book');
     const submitBookForm = document.querySelector('.submit-book-form');
     const page = document.querySelector('.page');
@@ -8,9 +10,17 @@
     const readItButton = document.querySelector('.read-it');
     const deleteBookButton = document.querySelector('.delete-book-button');
 
+    // variables for validating book form
+    const titleEntry = document.getElementById("title");
+    const titleError = document.getElementById("title-error");
+    const authorEntry = document.getElementById("author");
+    const authorError = document.getElementById("author-error")
+    const pagesEntry = document.getElementById("pages");
+    const pagesError = document.getElementById("pages-error");
 
-    // toggle function to handle opening the "add new book" form and to close the same form if no new book is added
     let toggleFormOn = false;
+    let readStatus = null;
+    let myLibrary = [];
 
     const toggleBookForm = function() {
         if (toggleFormOn === true) {
@@ -32,9 +42,9 @@
 
     // function to toggle have I read it status
     function toggleReadStatus() {
-        if (readItButton.textContent = "Yes") {
+        if (readItButton.textContent == "Yes") {
             readStatus = true;
-        } else if (readItButton.textContent = "No") {
+        } else if (readItButton.textContent == "No") {
             readStatus = false;
         }
         
@@ -49,15 +59,12 @@
             readItButton.textContent = "Yes";
             readStatus = true;
         }
-    };
+    }
 
     // function to delete the books when the x button is clicked at the top right
     function deleteBook() {
         this.parentElement.remove();
     }
-
-    // Library array to hold all books and constructor function to easily create and store new book information
-    let myLibrary = [];
 
     class Book {
         constructor(title, author, pages) {
@@ -75,32 +82,12 @@
         let titleEntry = document.getElementById("title").value;
         let authorEntry = document.getElementById("author").value;
         let pagesEntry = document.getElementById("pages").value;
-        let input = document.getElementsByClassName("input");
-
-        if (titleEntry.length == 0 || authorEntry.length == 0 || pagesEntry.length == 0) {
-            input.value = "Empty";
-            bookForm.reset();
-            alert("You left either your title, author, or pages entry blank, please try again"); 
-            return;
-        } else if (authorEntry.length > 50 || titleEntry.length > 50) {
-            input.value = "Empty";
-            bookForm.reset();
-            alert("Your author or title entry is too long, please try again");
-            return;
-        } else if (isNaN(pagesEntry) || pagesEntry < 1 || pagesEntry > 3000) {
-            input.value = "Empty";
-            bookForm.reset();
-            alert("Your # of pages of entry is invalid");
-            return;
-        }
-
         let newBook = new Book(titleEntry, authorEntry, pagesEntry);
 
         myLibrary.push(newBook);
-        console.log(myLibrary);
         createBookCard(titleEntry, authorEntry, pagesEntry);
         bookForm.reset();
-    };
+    }
 
 
     //function to create the auto-population of book cards as they are added and validated
@@ -158,10 +145,83 @@
         deleteBookButton.addEventListener('click', function() {
             this.parentElement.remove();
         });
-    };
+    }
 
-    submitBookForm.addEventListener('click', addBookToLibrary);
     addBookButton.addEventListener('click', toggleBookForm);
     readItButton.addEventListener('click', toggleReadStatus);
     deleteBookButton.addEventListener('click', deleteBook);
+
+    // Validation for Book Form
+    titleEntry.addEventListener('input', () => {
+        console.log('checking input for title');
+        if (titleEntry.validity.valid) {
+            titleError.textContent = "";
+            titleError.className = 'error';
+        } else {
+            showError();
+        }
+    });
+
+    authorEntry.addEventListener('input', () => {
+        console.log('checking input for author');
+        if (authorEntry.validity.valid) {
+            authorError.textContent = "";
+            authorError.className = 'error';
+        } else {
+            showError();
+        }
+    });
+
+    pagesEntry.addEventListener('input', () => {
+        console.log('checking input for pages');
+        if (pagesEntry.validity.valid) {
+            pagesError.textContent = "";
+            pagesError.className = 'error';
+        } else {
+            showError();
+        }
+    });
+
+    submitBookForm.addEventListener('click', (e) => {
+        console.log('attempting to submit');
+        if (!titleEntry.validity.valid || !authorEntry.validity.valid || !pagesEntry.validity.valid) {
+            showError();
+            e.preventDefault();
+        } else {
+            addBookToLibrary();
+        }
+    });
+
+    function showError() {
+        if (titleEntry.validity.valueMissing) {
+            titleError.textContent = "You need to enter a book title";
+            titleError.className = 'error active';
+        } else if (titleEntry.validity.tooShort) {
+            titleError.textContent = `Book should be at least ${ titleEntry.minLength } characters; you entered: ${ titleEntry.value.length }`;
+            titleError.className = 'error active';
+        } else if (titleEntry.validity.tooLong) {
+            titleError.textContent = `Book should be no more than ${ titleEntry.maxLength } characters; you entered: ${ titleEntry.value.length }`;
+            titleError.className = 'error active';
+        } else if (authorEntry.validity.valueMissing) {
+            authorError.textContent = "You need to enter the author's name";
+            authorError.className = 'error active';
+        } else if (authorEntry.validity.tooShort) {
+            authorError.textContent = `The author name should be at least ${ authorEntry.minLength } characters; you entered: ${ authorEntry.value.length }`;
+            authorError.className = 'error active';
+        } else if (authorEntry.validity.tooLong) {
+            authorError.textContent = `The author name should be no more than ${ authorEntry.maxLength } characters; you entered: ${ authorEntry.value.length }`;
+            authorError.className = 'error active';
+        } else if (pagesEntry.validity.valueMissing) {
+            pagesError.textContent = "You need to include the number of pages";
+            pagesError.className = 'error active';
+        } else if (pagesEntry.validity.tooShort) {
+            pagesError.textContent = `The amount of pages must be at least ${ pagesEntry.minLength } characters; you entered: ${ pagesEntry.value.length }`;
+            pagesError.className = 'error active';
+        } else if (pagesEntry.validity.tooLong) {
+            pagesError.textContent = `The amount of pages must be less than ${ pagesEntry.maxLength } characters; you entered: ${ pagesEntry.value.length }`;
+            pagesError.className = 'error active';
+        } else {
+            return;
+        }
+    }
 })();
