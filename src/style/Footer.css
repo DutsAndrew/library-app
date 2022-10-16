@@ -1,0 +1,9 @@
+.footer {
+  grid-row: 4;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #175676;
+  color: #CCE6F4;
+}

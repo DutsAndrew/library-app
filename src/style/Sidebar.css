@@ -1,0 +1,83 @@
+.sidebar {
+  display: flex;
+  grid-row: 2 / 4;
+  grid-column: 1;
+  background-color: #4BA3C3;
+  height: 100vh;
+  grid-template: 0.10fr 1fr / 0.5fr;
+  flex-flow: column wrap;
+  justify-items: flex-start;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 15vw;
+}
+
+.create-new-book-closed {
+  grid-column: 1;
+  grid-row: 1;
+  width: 150px;
+  height: 40px;
+  margin: 15px;
+  background-color: #CCE6F4;
+  box-shadow: 1px 1px black;
+  font-size: 16px;
+}
+
+.create-new-book-open {
+  grid-column: 1;
+  grid-row: 1;
+  width: 150px;
+  height: 40px;
+  margin: 15px;
+  background-color: red;
+  box-shadow: 1px 1px red;
+  font-size: 16px;
+}
+
+.form-container-closed {
+  margin-top: 10px;
+  display: none;
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 20px;
+  color: #CCE6F4;
+  font-weight: bold;
+}
+
+.form-container-open {
+  margin-top: 10px;
+  display: grid;
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 20px;
+  color: #CCE6F4;
+  font-weight: bold;
+}
+
+.input {
+  background-color: #CCE6F4;
+  height: 30px;
+  margin: 5px;
+}
+
+.legend-text {
+  color: #175676;
+  font-weight: bold;
+}
+
+.label-title {
+  color: #CCE6F4;
+}
+
+.submit-book-form {
+  width: 120px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: #175676;
+  color: #CCE6F4;
+  font-size: 0.9rem;
+}

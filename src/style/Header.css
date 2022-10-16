@@ -1,0 +1,30 @@
+.header {
+  display: grid;
+  grid-column: 1 / 4;
+  grid-row: 1;
+  height: minmax(0.5fr, 80px);
+  background-color: #175676;
+}
+
+#banner-left {
+  grid-column: 1;
+}
+
+.header-text {
+  color: #CCE6F4;
+  font-size: 58px;
+  margin-left: 40px;
+}
+
+#banner-right {
+  grid-column: 2;
+}
+
+.header-book-icon {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  justify-self: center;
+  align-self: center;
+  filter: invert(95%) sepia(64%) saturate(5579%) hue-rotate(175deg) brightness(106%) contrast(91%);
+}
