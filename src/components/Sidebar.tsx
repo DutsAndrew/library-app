@@ -1,7 +1,13 @@
 import React, { FC, useState, MouseEvent } from 'react';
 import '../style/Sidebar.css';
 
-const Sidebar = () => {
+interface SidebarProps {
+  addBookToLibrary: Function,
+}
+
+const Sidebar: FC<SidebarProps> = (props): JSX.Element => {
+
+  const { addBookToLibrary } = props;
 
   const [formToggle, setFormToggle] = useState({
     toggle: false,
@@ -101,6 +107,34 @@ const Sidebar = () => {
     return;
   };
 
+  const submitBookForm = (e: MouseEvent): void => {
+    e.preventDefault();
+    const titleEntry: any | null = document.getElementById("title");
+    const authorEntry: any | null = document.getElementById("author");
+    const pagesEntry: any | null = document.getElementById("pages");
+
+    if (!titleEntry.validity.valid) {
+      showError(titleEntry, titleEntry.nextSibling);
+      return;
+    };
+
+    if (!authorEntry.validity.valid) {
+      showError(authorEntry, authorEntry.nextSibling);
+      return;
+    };
+
+    if (!pagesEntry.validity.valid) {
+      showError(pagesEntry, pagesEntry.nextSibling);
+      return;
+    };
+
+    if (titleEntry.validity.valid
+      && authorEntry.validity.valid
+      && pagesEntry.validity.valid
+      ) {
+        addBookToLibrary(titleEntry.value, authorEntry.value, Number(pagesEntry.value));
+      };
+  }
 
   return (
     <div className="sidebar">
@@ -120,7 +154,7 @@ const Sidebar = () => {
               <input type="number" className="input" id="pages" placeholder="# of pages" maxLength={5} minLength={2} onChange={handleBookFormChange} required></input>
               <p className ="error-msg" id="pages-error"></p>
 
-              <input type="button" name="submit" className="submit-book-form" value="Add Book"></input>
+              <input type="submit" name="submit" className="submit-book-form" value="Add Book" onClick={submitBookForm} ></input>
             </fieldset>
         </form>
     </div>
