@@ -36,12 +36,44 @@ const App = () => {
     });
   };
     
+  const changeReadStatus = (e: any): void => {
+    const bookTitleToChange: Element = e.target.parentElement.children[1].textContent;
+    const bookAuthorToChange: Element = e.target.parentElement.children[2].textContent;
+    const bookPagesToChange: Element = e.target.parentElement.children[3].textContent;
+    const currentLibrary: any[] = library.library;
+    currentLibrary.forEach((book: any) => {
+      if (book.title === bookTitleToChange 
+        && book.author === bookAuthorToChange
+        && book.pages === Number(bookPagesToChange)
+        ) {
+          let amendedBook: any = currentLibrary[currentLibrary.indexOf(book)];
+          if (book.readIt === true) {
+            amendedBook.readIt = false;
+            currentLibrary[currentLibrary.indexOf(book)] = amendedBook;
+            console.log(currentLibrary[currentLibrary.indexOf(book)], amendedBook);
+            setLibrary({
+              library: [currentLibrary],
+            });
+            return;
+          };
+          if (book.readIt === false) {
+            amendedBook.readIt = true;
+            currentLibrary[currentLibrary.indexOf(book)] = amendedBook;
+            console.log(currentLibrary[currentLibrary.indexOf(book)], amendedBook);
+            setLibrary({
+              library: [currentLibrary],
+            });
+            return;
+          };
+      }
+    });
+  };
 
   return (
     <>
       <Header />
       <Sidebar addBookToLibrary={addBookToLibrary} />
-      <Page library={library} />
+      <Page library={library} changeReadStatus={changeReadStatus} />
       <Footer />
     </>
   );

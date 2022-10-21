@@ -1,16 +1,17 @@
 .sidebar {
-  display: flex;
+  display: grid;
   grid-row: 2 / 4;
   grid-column: 1;
   background-color: #4BA3C3;
   height: 100vh;
-  grid-template: 0.10fr 1fr / 0.5fr;
+  grid-template: 0.10fr 0.5fr / 0.5fr;
   flex-flow: column wrap;
   justify-items: flex-start;
   align-items: center;
   overflow-x: hidden;
   overflow-y: scroll;
   width: 20vw;
+  margin: none;
 }
 
 .create-new-book-closed {

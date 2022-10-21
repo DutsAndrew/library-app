@@ -139,7 +139,7 @@ const Sidebar: FC<SidebarProps> = (props): JSX.Element => {
   return (
     <div className="sidebar">
         <button id='add-book-button' className="create-new-book-closed" onClick={openBookForm} >+ Add Book</button>
-        <form noValidate id="book-form" className="form-container-closed">x
+        <form noValidate id="book-form" className="form-container-closed">
             <fieldset>
               <legend className="legend-text">Add new book to library</legend>
               <label htmlFor="title" className="label-title">Title:</label>

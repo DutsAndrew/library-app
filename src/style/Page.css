@@ -2,6 +2,7 @@
   display: grid;
   grid-row: 2 / 4;
   grid-column: 2 / 4;
+  width: 80vw;
   background-color: #CCE6F4;
   grid-auto-flow: column;
   grid-auto-rows: 0.5fr;
@@ -52,7 +53,16 @@
   padding-bottom: 15px;
 }
 
-.read-it {
+.read-it-false {
+  width: 100px;
+  height: 35px;
+  font-size: 14px;
+  background-color: #CCE6F4;
+  color: #175676;
+  border-radius: 2px;
+}
+
+.read-it-true {
   width: 100px;
   height: 35px;
   font-size: 14px;
