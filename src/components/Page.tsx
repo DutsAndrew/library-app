@@ -5,11 +5,12 @@ import BookItem from './BookItem';
 interface library {
   library: {library: [{title: string, author: string, pages: number, readIt: boolean, id: string}]},
   changeReadStatus: React.MouseEventHandler<HTMLButtonElement> | undefined,
+  removeBook: React.MouseEventHandler<HTMLButtonElement> | undefined,
 }
 
 const Page: FC<library> = (props): JSX.Element => {
 
-  const { library, changeReadStatus } = props;
+  const { library, changeReadStatus, removeBook } = props;
 
   return (
     <div className="page">
@@ -17,7 +18,7 @@ const Page: FC<library> = (props): JSX.Element => {
             <ul className="book-cards" id="book-example">
               {Array.isArray(library.library) && library.library.map((book) => {
                 return <li className="book" id={book.id} key={book.id} >
-                  <BookItem book={book} changeReadStatus={changeReadStatus} />
+                  <BookItem book={book} changeReadStatus={changeReadStatus} removeBook={removeBook} />
                 </li>
               })}
             </ul>

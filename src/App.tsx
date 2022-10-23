@@ -45,7 +45,6 @@ const App = () => {
   };
     
   const changeReadStatus = (e: any): void => {
-    console.log(library.library);
     const bookId = e.target.parentElement.id;
     const currentLibrary: any[] = library.library;
     currentLibrary.forEach((book: any) => {
@@ -59,14 +58,27 @@ const App = () => {
     });
   };
 
+  const removeBook = (e: any): void => {
+    const bookId = e.target.parentElement.id;
+    const currentLibrary: any[] = library.library;
+    currentLibrary.forEach((book: any) => {
+      if (book.id === bookId) {
+        currentLibrary.splice(currentLibrary.indexOf(book), 1);
+        setLibrary({
+          library: [...currentLibrary],
+        });
+      };
+    });
+  };
+
   return (
     <>
       <Header />
       <Sidebar addBookToLibrary={addBookToLibrary} />
-      <Page library={library} changeReadStatus={changeReadStatus} />
+      <Page library={library} changeReadStatus={changeReadStatus} removeBook={removeBook} />
       <Footer />
     </>
   );
-}
+};
 
 export default App;
