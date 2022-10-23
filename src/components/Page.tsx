@@ -16,7 +16,7 @@ const Page: FC<library> = (props): JSX.Element => {
         <div className="book-library">
             <ul className="book-cards" id="book-example">
               {Array.isArray(library.library) && library.library.map((book) => {
-                return <li className="book" key={book.id}>
+                return <li className="book" id={book.id} key={book.id} >
                   <BookItem book={book} changeReadStatus={changeReadStatus} />
                 </li>
               })}

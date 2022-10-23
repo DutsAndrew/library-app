@@ -16,7 +16,7 @@ const BookItem: FC<bookItem> = (props): JSX.Element => {
       <p id="author-of-book" className="card-info">{book.author}</p>
       <p id="pages-of-book" className="card-info">{book.pages}</p>
       <p id="have-i-read-it-text" className="card-info">Have I read this book yet?</p>
-      <button className={`read-it-${book.readIt}`} onClick={changeReadStatus} >{book.readIt}</button>
+      <button className={`read-it-${book.readIt}`} onClick={changeReadStatus} >{`${book.readIt}`}</button>
     </>
   );
 };

@@ -20,52 +20,42 @@ const App = () => {
       public pages: number,
       public readIt: boolean,
       public id: string,
-    ) {
-      const getInfo = function () {
-        return `${title}, by ${author}, ${pages}, ${readIt}`;
+    ) {}
+    getInfo() {
+      return `${this.title}, by ${this.author}, ${this.pages}, ${this.readIt}`;
+    };
+    changeBookStatus() {
+      if (this.readIt === true) {
+        this.readIt = false;
+        return;
       };
-    }
-  }
+      if (this.readIt === false) {
+        this.readIt = true;
+      };
+    };
+  };
 
   const addBookToLibrary = (title: string, author: string, pages: number): void => {
     const currentLibrary: any[] = library.library;
-    const newId: any = uniqid();
-    const newBook = new Book(title, author, pages, false, newId);
+    const newBook = new Book(title, author, pages, false, uniqid());
     setLibrary({
       library: [...currentLibrary, newBook],
     });
   };
     
   const changeReadStatus = (e: any): void => {
-    const bookTitleToChange: Element = e.target.parentElement.children[1].textContent;
-    const bookAuthorToChange: Element = e.target.parentElement.children[2].textContent;
-    const bookPagesToChange: Element = e.target.parentElement.children[3].textContent;
+    const bookId = e.target.parentElement.id;
     const currentLibrary: any[] = library.library;
     currentLibrary.forEach((book: any) => {
-      if (book.title === bookTitleToChange 
-        && book.author === bookAuthorToChange
-        && book.pages === Number(bookPagesToChange)
-        ) {
-          let amendedBook: any = currentLibrary[currentLibrary.indexOf(book)];
-          if (book.readIt === true) {
-            amendedBook.readIt = false;
-            currentLibrary[currentLibrary.indexOf(book)] = amendedBook;
-            console.log(currentLibrary[currentLibrary.indexOf(book)], amendedBook);
-            setLibrary({
-              library: [currentLibrary],
-            });
-            return;
-          };
-          if (book.readIt === false) {
-            amendedBook.readIt = true;
-            currentLibrary[currentLibrary.indexOf(book)] = amendedBook;
-            console.log(currentLibrary[currentLibrary.indexOf(book)], amendedBook);
-            setLibrary({
-              library: [currentLibrary],
-            });
-            return;
-          };
-      }
+      if (book.id === bookId) {
+        console.log(book, currentLibrary);
+        book.changeBookStatus();
+        console.log(book, currentLibrary);
+        setLibrary({
+          library: [currentLibrary],
+        });
+        return;
+      };
     });
   };
 
