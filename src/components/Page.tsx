@@ -2,13 +2,13 @@ import React, { FC, useEffect } from "react";
 import '../style/Page.css';
 import BookItem from './BookItem';
 
-interface library {
+interface PageProps {
   library: {library: [{title: string, author: string, pages: number, readIt: boolean, id: string}]},
   changeReadStatus: React.MouseEventHandler<HTMLButtonElement> | undefined,
   removeBook: React.MouseEventHandler<HTMLButtonElement> | undefined,
 }
 
-const Page: FC<library> = (props): JSX.Element => {
+const Page: FC<PageProps> = (props): JSX.Element => {
 
   const { library, changeReadStatus, removeBook } = props;
 

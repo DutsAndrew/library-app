@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 
-interface bookItem {
+interface BookItemProps {
   book: { title: string; author: string; pages: number; readIt: boolean; id: string; },
   changeReadStatus: React.MouseEventHandler<HTMLButtonElement> | undefined,
   removeBook: React.MouseEventHandler<HTMLButtonElement> | undefined,
 };
 
-const BookItem: FC<bookItem> = (props): JSX.Element => {
+const BookItem: FC<BookItemProps> = (props): JSX.Element => {
 
   const { book, changeReadStatus, removeBook } = props;
 
