@@ -41,20 +41,20 @@ const App = () => {
     setLibrary({
       library: [...currentLibrary, newBook],
     });
+    console.log(library, currentLibrary, newBook);
   };
     
   const changeReadStatus = (e: any): void => {
+    console.log(library.library);
     const bookId = e.target.parentElement.id;
     const currentLibrary: any[] = library.library;
     currentLibrary.forEach((book: any) => {
       if (book.id === bookId) {
-        console.log(book, currentLibrary);
         book.changeBookStatus();
-        console.log(book, currentLibrary);
+        currentLibrary[currentLibrary.indexOf(book)] = book;
         setLibrary({
-          library: [currentLibrary],
+          library: [...currentLibrary],
         });
-        return;
       };
     });
   };
