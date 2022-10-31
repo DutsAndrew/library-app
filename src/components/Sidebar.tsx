@@ -50,9 +50,9 @@ const Sidebar: FC<SidebarProps> = (props): JSX.Element => {
     }
   }
 
-  const handleBookFormChange = (e: any | null): void => {
-    const entryThatChanged: any | null = e.target;
-    const errorText: any | null = e.target.nextSibling;
+  const handleBookFormChange = (e: any): void => {
+    const entryThatChanged: any = e.target;
+    const errorText: any = e.target.nextSibling;
     if (entryThatChanged && errorText) {
       if (entryThatChanged.validity.valid) {
         errorText.textContent = "";
@@ -63,7 +63,7 @@ const Sidebar: FC<SidebarProps> = (props): JSX.Element => {
     };
   };
 
-  const showError = (entry: any | null, error: any | null): void => {
+  const showError = (entry: any, error: any): void => {
     if (entry.id === 'title') {
       if (entry.validity.valueMissing) {
         error.textContent = "You need to enter a book title";

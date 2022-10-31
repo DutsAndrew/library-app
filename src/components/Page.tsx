@@ -18,7 +18,11 @@ const Page: FC<PageProps> = (props): JSX.Element => {
             <ul className="book-cards" id="book-example">
               {Array.isArray(library.library) && library.library.map((book) => {
                 return <li className="book" id={book.id} key={book.id} >
-                  <BookItem book={book} changeReadStatus={changeReadStatus} removeBook={removeBook} />
+                  <BookItem
+                    book={book}
+                    changeReadStatus={changeReadStatus}
+                    removeBook={removeBook}
+                  />
                 </li>
               })}
             </ul>
