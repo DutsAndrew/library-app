@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React, { useState, useEffect, MouseEvent, FormEvent } from 'react';
 import uniqid from 'uniqid';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -9,11 +9,22 @@ import './style/App.css';
 import './style/FormValidation.css';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, User, signInWithEmailAndPassword } from 'firebase/auth';
+
+interface userState {
+  formCompleted: boolean,
+  currentUser: User | string,
+  errorStatus: string | object,
+};
+
+interface dbState {
+  status: boolean,
+  error: string | object,
+};
 
 const App = (): JSX.Element | null => {
 
-  // Initialize Firebase Authentication and get a reference to the service
+  // Firebase Init
   const firebaseConfig: object = {
     apiKey: "AIzaSyB25C0MNgL_tEDdOGN759b1NX0ZgHC5bj8",
     authDomain: "library-app-7b48d.firebaseapp.com",
@@ -23,19 +34,21 @@ const App = (): JSX.Element | null => {
     appId: "1:243144925550:web:541a504b3ae60cb2c8a17f",
   };
   const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
-  const [userStatus, setUserStatus] = useState({
+  const [userStatus, setUserStatus] = useState<userState>({
     formCompleted: false,
+    currentUser: '',
+    errorStatus: '',
   });
 
-  const [dbStatus, setDbStatus] = useState({
+  const [dbStatus, setDbStatus] = useState<dbState>({
     status: false,
-    error: null,
+    error: '',
   });
 
-  useEffect(() => {
-    const db = getFirestore(app);
-    
+  useEffect(() => {    
     if (dbStatus.status === false) {
       // Get a list of books from database
       const data = getBooks(db);
@@ -75,13 +88,56 @@ const App = (): JSX.Element | null => {
     };
   };
 
-  const submitAccountInformation = (e: MouseEvent): void => {
-    e.preventDefault();
+  const submitAccountInformation = async (email: string, password: string): Promise<void> => {
     console.log('form is being submitted');
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(user);
+    // await createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in 
+    //     const user = userCredential.user;
+    //     setUserStatus({
+    //       formCompleted: true,
+    //       currentUser: user,
+    //       errorStatus: '',
+    //     });
+    //     console.log(user);
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     setUserStatus({
+    //       formCompleted: false,
+    //       currentUser: 'not found',
+    //       errorStatus: `${errorCode}, ${errorMessage}`,
+    //     });
+    //     alert(`${errorCode}, ${errorMessage}, please try again`);
+    //   });
   };
 
-  const signInUser = (): void => {
+  const signInUser = async (email: string, password: string): Promise<void> => {
     console.log('attempting to sign in');
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUserStatus({
+          formCompleted: true,
+          currentUser: user,
+          errorStatus: '',
+        });
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setUserStatus({
+          formCompleted: false,
+          currentUser: 'not found',
+          errorStatus: `${errorCode}, ${errorMessage}`,
+        });
+        alert(`${errorCode}, ${errorMessage}, please try again`);
+      });
   }
 
   const addBookToLibrary = (title: string, author: string, pages: number): void => {
@@ -125,7 +181,6 @@ const App = (): JSX.Element | null => {
       <>
         <Header />
         <AccountAuthentication 
-          userStatus={userStatus}
           submitAccountInformation={submitAccountInformation}
           signInUser={signInUser}
         />

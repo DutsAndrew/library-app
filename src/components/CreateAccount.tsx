@@ -1,7 +1,7 @@
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC, MouseEventHandler, FormEventHandler } from "react";
 
 interface CreateAccountProps {
-  submitAccountInformation: MouseEventHandler<HTMLButtonElement>,
+  submitAccountInformation: (email: string, password: string) => Promise<void>,
 };
 
 const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
@@ -73,17 +73,55 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
     };
   };
 
+  const submitAccountCreationForm = (e: React.FormEvent<HTMLFormElement>): void  => {
+    e.preventDefault();
+    // any type is assigned due to issues with validity.valid not working with actual type
+    const emailEntry: any = document.getElementById("email-input");
+    const passwordEntry: any = document.getElementById("password-input");
+    const passwordConfirmEntry: any = document.getElementById("password-confirm-input");
+    const activeErrors: number = document.querySelectorAll('.error-active').length;
+
+    if (emailEntry) {
+      if (!emailEntry.validity.valid) {
+        showError(emailEntry, emailEntry.nextSibling);
+        return;
+      };
+    };
+
+    if (passwordEntry) {
+      if (!passwordEntry.validity.valid) {
+        showError(passwordEntry, passwordEntry.nextSibling);
+        return;
+      };
+    };
+
+    if (passwordConfirmEntry) {
+      if (!passwordConfirmEntry.validity.valid) {
+        showError(passwordConfirmEntry, passwordConfirmEntry.nextSibling);
+        return;
+      };
+    };
+
+    if (emailEntry.validity.valid
+      && passwordEntry.validity.valid
+      && passwordConfirmEntry.validity.valid
+      && activeErrors === 0
+      ) {
+       submitAccountInformation(emailEntry.value, passwordEntry.value);
+      };
+  }
 
   return (
-    <form id="user-creation-form">
+    <form id="user-creation-form" onSubmit={submitAccountCreationForm}>
       <fieldset>
-        <legend>Complete the fields below to create an account:</legend>
+        <legend>Create an account:</legend>
         <label htmlFor="email-input" >*Email:</label>
         <input id="email-input" 
           placeholder="JohnWick92@gmail.com"
           onChange={handleFormChange}
           minLength={9}
           maxLength={253}
+          type="email"
           required>
         </input>
         <p id="email-input-error" className ="error-msg" ></p>
@@ -108,8 +146,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
         </input>
         <p id="password-confirm-input-error" className ="error-msg" ></p>
         <button id="account-submit"
-          type="submit"
-          onClick={submitAccountInformation} >
+          type="submit">
             Submit
         </button>
       </fieldset>

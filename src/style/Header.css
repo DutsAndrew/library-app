@@ -2,7 +2,7 @@
   display: grid;
   grid-column: 1 / 4;
   grid-row: 1;
-  height: minmax(0.5fr, 80px);
+  height: minmax(1vh, 5vh);
   background-color: #175676;
 }
 

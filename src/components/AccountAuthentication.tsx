@@ -1,22 +1,23 @@
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC, MouseEventHandler, FormEventHandler } from "react";
 import '../style/AccountAuthentication.css';
 import CreateAccount from './CreateAccount';
 import SignIn from './SignInUser';
+import ExternalLogIn from './ExternalLogIn';
 
 interface AccountAuthenticationProps {
-  userStatus: object,
-  submitAccountInformation: MouseEventHandler<HTMLButtonElement>,
-  signInUser: Function,
+  submitAccountInformation: (email: string, password: string) => Promise<void>,
+  signInUser: (email: string, password: string) => Promise<void>,
 };
 
 const AccountAuthentication: FC<AccountAuthenticationProps> = (props): JSX.Element => {
 
-  const { userStatus, submitAccountInformation, signInUser } = props;
+  const { submitAccountInformation, signInUser } = props;
 
   return (
     <div id="account-authentication-dashboard">
       <CreateAccount submitAccountInformation={submitAccountInformation} />
       <SignIn signInUser={signInUser} />
+      <ExternalLogIn />
     </div>
   );
 };
