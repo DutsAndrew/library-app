@@ -20,7 +20,7 @@
   background-color: #175676;
   color: #CCE6F4;
   width: 25vw;
-  height: 40vh;
+  height: 45vh;
   font-size: 1.25em;
   justify-items: center;
   align-items: center;
@@ -49,7 +49,7 @@
   background-color: #175676;
   color: #CCE6F4;
   width: 25vw;
-  height: 40vh;
+  height: 45vh;
   font-size: 1.25em;
   justify-items: center;
   align-items: center;
@@ -98,7 +98,7 @@
 
 #sign-in-with-google-text {
   margin: 0;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   font-size: 1.5em;
   color: #CCE6F4;
 }

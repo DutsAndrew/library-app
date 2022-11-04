@@ -1,14 +1,11 @@
-import React, { useState, useEffect, MouseEvent, FormEvent } from 'react';
-import uniqid from 'uniqid';
+import React, { useState } from 'react';
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import Page from './components/Page';
+import Library from './components/Library';
 import Footer from './components/Footer';
 import AccountAuthentication from './components/AccountAuthentication';
 import './style/App.css';
 import './style/FormValidation.css';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { getAuth,
   createUserWithEmailAndPassword,
   User,
@@ -23,11 +20,6 @@ interface userState {
   errorStatus: string | object,
 };
 
-interface dbState {
-  status: boolean,
-  error: string | object,
-};
-
 const App = (): JSX.Element | null => {
 
   // Firebase Init
@@ -40,7 +32,6 @@ const App = (): JSX.Element | null => {
     appId: "1:243144925550:web:541a504b3ae60cb2c8a17f",
   };
   const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
@@ -48,11 +39,6 @@ const App = (): JSX.Element | null => {
     formCompleted: false,
     currentUser: '',
     errorStatus: '',
-  });
-
-  const [dbStatus, setDbStatus] = useState<dbState>({
-    status: false,
-    error: '',
   });
 
   const createAccountWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
@@ -140,82 +126,6 @@ const App = (): JSX.Element | null => {
       });
   };
 
-  useEffect(() => {    
-    if (dbStatus.status === false) {
-      // Get a list of books from database
-      const data = getBooks(db);
-      async function getBooks(db: any): Promise<object> {
-        const booksCollection = collection(db, 'books');
-        const booksSnapshot = await getDocs(booksCollection);
-        const booksList = booksSnapshot.docs.map(doc => doc.data());
-        console.log('async', booksList)
-        return booksList;
-      };
-    };
-  }, []);
-
-  const [library, setLibrary]: any[] = useState({
-    library: [],
-  });
-
-  class Book {
-    constructor(
-      public title: string,
-      public author: string,
-      public pages: number,
-      public readIt: boolean,
-      public id: string,
-    ) {}
-    getInfo() {
-      return `${this.title}, by ${this.author}, ${this.pages}, ${this.readIt}`;
-    };
-    changeBookStatus() {
-      if (this.readIt === true) {
-        this.readIt = false;
-        return;
-      };
-      if (this.readIt === false) {
-        this.readIt = true;
-      };
-    };
-  };
-
-  const addBookToLibrary = (title: string, author: string, pages: number): void => {
-    const currentLibrary: any[] = library.library;
-    const newBook = new Book(title, author, pages, false, uniqid());
-    setLibrary({
-      library: [...currentLibrary, newBook],
-    });
-    console.log(library, currentLibrary, newBook);
-  };
-    
-  const changeReadStatus = (e: any): void => {
-    const bookId = e.target.parentElement.id;
-    const currentLibrary: any[] = library.library;
-    currentLibrary.forEach((book: any) => {
-      if (book.id === bookId) {
-        book.changeBookStatus();
-        currentLibrary[currentLibrary.indexOf(book)] = book;
-        setLibrary({
-          library: [...currentLibrary],
-        });
-      };
-    });
-  };
-
-  const removeBook = (e: any): void => {
-    const bookId = e.target.parentElement.id;
-    const currentLibrary: any[] = library.library;
-    currentLibrary.forEach((book: any) => {
-      if (book.id === bookId) {
-        currentLibrary.splice(currentLibrary.indexOf(book), 1);
-        setLibrary({
-          library: [...currentLibrary],
-        });
-      };
-    });
-  };
-
   if (userStatus.formCompleted === false) {
     return (
       <>
@@ -234,12 +144,7 @@ const App = (): JSX.Element | null => {
     return (
       <>
         <Header />
-        <Sidebar addBookToLibrary={addBookToLibrary} />
-        <Page 
-          library={library}
-          changeReadStatus={changeReadStatus}
-          removeBook={removeBook}
-        />
+        <Library />
         <Footer />
       </>
     );
