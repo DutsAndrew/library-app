@@ -31,6 +31,7 @@ const App = (): JSX.Element | null => {
     messagingSenderId: "243144925550",
     appId: "1:243144925550:web:541a504b3ae60cb2c8a17f",
   };
+
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -129,7 +130,7 @@ const App = (): JSX.Element | null => {
   if (userStatus.formCompleted === false) {
     return (
       <>
-        <Header />
+        <Header userStatus={userStatus} />
         <AccountAuthentication 
           createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
           signInUser={signInUser}
@@ -143,7 +144,7 @@ const App = (): JSX.Element | null => {
   if (userStatus.formCompleted === true) {
     return (
       <>
-        <Header />
+        <Header userStatus={userStatus} />
         <Library />
         <Footer />
       </>

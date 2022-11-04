@@ -17,7 +17,11 @@
 }
 
 #banner-right {
+  display: grid;
   grid-column: 2;
+  justify-content: center;
+  align-content: center;
+  color: #CCE6F4;
 }
 
 .header-book-icon {

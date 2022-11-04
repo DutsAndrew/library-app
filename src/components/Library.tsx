@@ -10,7 +10,7 @@ interface dbState {
   error: string | object,
 };
 
-const Library = () => {
+const Library = (): JSX.Element => {
 
   // Firebase Init
   const firebaseConfig: object = {
