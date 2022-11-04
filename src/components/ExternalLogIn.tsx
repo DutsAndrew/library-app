@@ -17,7 +17,7 @@ const ExternalLogIn: FC<ExternalLoginProps> = (props): JSX.Element => {
   return (
     <form id="external-login" onSubmit={handleSubmit} >
       <button id="sign-in-with-google-button" type="submit" >
-        <p>Sign in with Google</p>
+        <p id="sign-in-with-google-text" >Sign in with Google</p>
         <img id="google-logo-svg" src={googleLogo} alt="google logo" ></img>
       </button>
     </form>

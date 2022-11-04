@@ -22,7 +22,7 @@ const SignIn: FC<SignInProps> = (props): JSX.Element => {
 
   return (
     <form id="sign-in-form" onSubmit={handleSignIn} >
-      <fieldset>
+      <fieldset id="sign-in-fieldset" >
         <legend>Sign In:</legend>
         <label htmlFor="email-login" >*Email:</label>
         <input id="email-login" placeholder="JohnWick92@gmail.com"

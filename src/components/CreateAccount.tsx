@@ -113,7 +113,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
 
   return (
     <form id="user-creation-form" onSubmit={submitAccountCreationForm}>
-      <fieldset>
+      <fieldset id="create-account-fieldset" >
         <legend>Create an account:</legend>
         <label htmlFor="email-input" >*Email:</label>
         <input id="email-input" 
