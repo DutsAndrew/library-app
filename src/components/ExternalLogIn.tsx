@@ -1,10 +1,26 @@
-import React from "react";
+import React, { FC, FormEventHandler } from "react";
+import googleLogo from '../assets/google-logo.svg';
 
-const ExternalLogIn = (): JSX.Element => {
+interface ExternalLoginProps {
+  signInWithGoogleAccount: () => Promise<void>,
+};
+
+const ExternalLogIn: FC<ExternalLoginProps> = (props): JSX.Element => {
+
+  const { signInWithGoogleAccount } = props;
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    signInWithGoogleAccount();
+  };
+
   return (
-    <div id="external-login">
-      <p>External Login</p>
-    </div>
+    <form id="external-login" onSubmit={handleSubmit} >
+      <button id="sign-in-with-google-button" type="submit" >
+        <p>Sign in with Google</p>
+        <img id="google-logo-svg" src={googleLogo} alt="google logo" ></img>
+      </button>
+    </form>
   );
 };
 

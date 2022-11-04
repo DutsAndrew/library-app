@@ -9,7 +9,13 @@ import './style/App.css';
 import './style/FormValidation.css';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, User, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth,
+  createUserWithEmailAndPassword,
+  User,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup 
+} from 'firebase/auth';
 
 interface userState {
   formCompleted: boolean,
@@ -36,6 +42,7 @@ const App = (): JSX.Element | null => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
 
   const [userStatus, setUserStatus] = useState<userState>({
     formCompleted: false,
@@ -47,6 +54,91 @@ const App = (): JSX.Element | null => {
     status: false,
     error: '',
   });
+
+  const createAccountWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
+    console.log('form is being submitted');
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUserStatus({
+          formCompleted: true,
+          currentUser: user,
+          errorStatus: '',
+        });
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setUserStatus({
+          formCompleted: false,
+          currentUser: 'not found',
+          errorStatus: `${errorCode}, ${errorMessage}`,
+        });
+        alert(`${errorCode}, ${errorMessage}, please try again`);
+      });
+  };
+
+  const signInUser = async (email: string, password: string): Promise<void> => {
+    console.log('attempting to sign in');
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUserStatus({
+          formCompleted: true,
+          currentUser: user,
+          errorStatus: '',
+        });
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setUserStatus({
+          formCompleted: false,
+          currentUser: 'not found',
+          errorStatus: `${errorCode}, ${errorMessage}`,
+        });
+        alert(`${errorCode}, ${errorMessage}, please try again`);
+      });
+  };
+
+  const signInWithGoogleAccount = async (): Promise<void> => {
+    console.log('attempting to sign in');
+    await signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        if (credential) {
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          setUserStatus({
+            formCompleted: true,
+            currentUser: user,
+            errorStatus: '',
+          });
+          console.log(user);
+        };
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        setUserStatus({
+          formCompleted: false,
+          currentUser: 'not found',
+          errorStatus: `${errorCode}, ${errorMessage}`,
+        });
+        alert(`${errorCode}, ${errorMessage}; ${email}, ${credential} please try again`);
+      });
+  };
 
   useEffect(() => {    
     if (dbStatus.status === false) {
@@ -87,58 +179,6 @@ const App = (): JSX.Element | null => {
       };
     };
   };
-
-  const submitAccountInformation = async (email: string, password: string): Promise<void> => {
-    console.log('form is being submitted');
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
-    // await createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in 
-    //     const user = userCredential.user;
-    //     setUserStatus({
-    //       formCompleted: true,
-    //       currentUser: user,
-    //       errorStatus: '',
-    //     });
-    //     console.log(user);
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     setUserStatus({
-    //       formCompleted: false,
-    //       currentUser: 'not found',
-    //       errorStatus: `${errorCode}, ${errorMessage}`,
-    //     });
-    //     alert(`${errorCode}, ${errorMessage}, please try again`);
-    //   });
-  };
-
-  const signInUser = async (email: string, password: string): Promise<void> => {
-    console.log('attempting to sign in');
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        setUserStatus({
-          formCompleted: true,
-          currentUser: user,
-          errorStatus: '',
-        });
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setUserStatus({
-          formCompleted: false,
-          currentUser: 'not found',
-          errorStatus: `${errorCode}, ${errorMessage}`,
-        });
-        alert(`${errorCode}, ${errorMessage}, please try again`);
-      });
-  }
 
   const addBookToLibrary = (title: string, author: string, pages: number): void => {
     const currentLibrary: any[] = library.library;
@@ -181,8 +221,9 @@ const App = (): JSX.Element | null => {
       <>
         <Header />
         <AccountAuthentication 
-          submitAccountInformation={submitAccountInformation}
+          createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
           signInUser={signInUser}
+          signInWithGoogleAccount={signInWithGoogleAccount}
         />
         <Footer />
       </>

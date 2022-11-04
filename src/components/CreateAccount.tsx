@@ -1,12 +1,12 @@
 import React, { FC, MouseEventHandler, FormEventHandler } from "react";
 
 interface CreateAccountProps {
-  submitAccountInformation: (email: string, password: string) => Promise<void>,
+  createAccountWithEmailAndPassword: (email: string, password: string) => Promise<void>,
 };
 
 const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
 
-  const { submitAccountInformation } = props;
+  const { createAccountWithEmailAndPassword } = props;
 
   const mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const passwordFormat: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/gm;
@@ -107,7 +107,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
       && passwordConfirmEntry.validity.valid
       && activeErrors === 0
       ) {
-       submitAccountInformation(emailEntry.value, passwordEntry.value);
+        createAccountWithEmailAndPassword(emailEntry.value, passwordEntry.value);
       };
   }
 

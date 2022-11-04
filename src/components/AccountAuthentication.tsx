@@ -5,19 +5,20 @@ import SignIn from './SignInUser';
 import ExternalLogIn from './ExternalLogIn';
 
 interface AccountAuthenticationProps {
-  submitAccountInformation: (email: string, password: string) => Promise<void>,
+  createAccountWithEmailAndPassword: (email: string, password: string) => Promise<void>,
   signInUser: (email: string, password: string) => Promise<void>,
+  signInWithGoogleAccount: () => Promise<void>,
 };
 
 const AccountAuthentication: FC<AccountAuthenticationProps> = (props): JSX.Element => {
 
-  const { submitAccountInformation, signInUser } = props;
+  const { createAccountWithEmailAndPassword, signInUser, signInWithGoogleAccount } = props;
 
   return (
     <div id="account-authentication-dashboard">
-      <CreateAccount submitAccountInformation={submitAccountInformation} />
+      <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword} />
       <SignIn signInUser={signInUser} />
-      <ExternalLogIn />
+      <ExternalLogIn signInWithGoogleAccount={signInWithGoogleAccount} />
     </div>
   );
 };
