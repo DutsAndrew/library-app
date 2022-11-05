@@ -2,8 +2,14 @@ import React, { FC } from 'react';
 import '../style/Header.css';
 import bookIcon from '../assets/book-icon.svg';
 
+interface userState {
+  formCompleted: boolean,
+  currentUser: any,
+  errorStatus: string | object,
+};
+
 interface HeaderProps {
-  userStatus: any,
+  userStatus: userState,
 };
 
 const Header: FC<HeaderProps> = (props): JSX.Element => {
@@ -25,7 +31,7 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
         </div>
       </div>
     );
-  } else if (userName !== undefined) {
+  } else if (userName !== undefined && userEmail !== undefined) {
     return (
       <div className="header" id="banner">
         <div className="header" id="banner-left">
