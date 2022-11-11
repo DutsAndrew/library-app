@@ -3,14 +3,35 @@ import uniqid from 'uniqid';
 import Sidebar from './Sidebar';
 import Page from './Page';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, getDoc, getDocs, query } from 'firebase/firestore';
+
+interface userState {
+  formCompleted: boolean,
+  currentUser: any,
+  errorStatus: string | object,
+};
 
 interface dbState {
   status: boolean,
   error: string | object,
 };
 
-const Library = (): JSX.Element => {
+interface LibraryProps {
+  userStatus: userState,
+}
+
+const Library: FC<LibraryProps> = (props): JSX.Element => {
+
+  const { userStatus } = props;
+
+  const [library, setLibrary]: any[] = useState({
+    library: [],
+  });
+
+  const [dbStatus, setDbStatus] = useState<dbState>({
+    status: false,
+    error: '',
+  });
 
   // Firebase Init
   const firebaseConfig: object = {
@@ -25,28 +46,32 @@ const Library = (): JSX.Element => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const [dbStatus, setDbStatus] = useState<dbState>({
-    status: false,
-    error: '',
-  });
-
   useEffect(() => {    
     if (dbStatus.status === false) {
       // Get a list of books from database
-      const data = getBooks(db);
+      getBooks(db);
       async function getBooks(db: any): Promise<object> {
-        const booksCollection = collection(db, 'books');
-        const booksSnapshot = await getDocs(booksCollection);
-        const booksList = booksSnapshot.docs.map(doc => doc.data());
-        console.log('async', booksList)
-        return booksList;
+        const libraryQuery = query(collection(db, 'library', userStatus.currentUser.uid, 'books'));
+        const librarySnapshot = await getDocs(libraryQuery);
+        const firebaseLibrary: any[] = []
+        librarySnapshot.forEach((doc) => {
+          const bookTitle = doc.data().title;
+          const bookAuthor = doc.data().author;
+          const bookPages = doc.data().pages;
+          const bookReadIt = doc.data().readIt;
+          const bookId = doc.data().id;
+          const newBook = new Book(bookTitle, bookAuthor, bookPages, bookReadIt, bookId);
+          firebaseLibrary.push(newBook);
+        });
+        const currentLibrary: any[] = library.library;
+        const mergedLibrary = currentLibrary.concat(firebaseLibrary);
+        setLibrary({
+          library: mergedLibrary,
+        });
+        return librarySnapshot;
       };
     };
   }, []);
-
-  const [library, setLibrary]: any[] = useState({
-    library: [],
-  });
 
   class Book {
     constructor(
@@ -70,13 +95,31 @@ const Library = (): JSX.Element => {
     };
   };
 
-  const addBookToLibrary = (title: string, author: string, pages: number): void => {
+  const addBookToFirebaseAndLibrary = async (title: string, author: string, pages: number): Promise<void> => {
     const currentLibrary: any[] = library.library;
     const newBook = new Book(title, author, pages, false, uniqid());
     setLibrary({
       library: [...currentLibrary, newBook],
     });
-    console.log(library, currentLibrary, newBook);
+    // Firestore data converter
+    const bookConverter = {
+      toFirestore: (newBook: any) => {
+          return {
+              title: newBook.title,
+              author: newBook.author,
+              pages: newBook.pages,
+              readIt: newBook.readIt,
+              id: newBook.id,
+              };
+      },
+      fromFirestore: (snapshot: any, options: any) => {
+          const data = snapshot.data(options);
+          return new Book(title, author, pages, false, uniqid());
+      },
+    };
+    // Set with bookConverter
+    const bookRef = doc(db, 'library', userStatus.currentUser.uid, 'books', newBook.id).withConverter(bookConverter);
+    await setDoc(bookRef, newBook);
   };
     
   const changeReadStatus = (e: any): void => {
@@ -108,7 +151,7 @@ const Library = (): JSX.Element => {
 
   return (
     <>
-      <Sidebar addBookToLibrary={addBookToLibrary} />
+      <Sidebar addBookToFirebaseAndLibrary={addBookToFirebaseAndLibrary} />
       <Page 
         library={library}
         changeReadStatus={changeReadStatus}

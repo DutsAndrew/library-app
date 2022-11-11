@@ -2,12 +2,12 @@ import React, { FC, useState, MouseEvent } from 'react';
 import '../style/Sidebar.css';
 
 interface SidebarProps {
-  addBookToLibrary: Function,
+  addBookToFirebaseAndLibrary: Function,
 }
 
 const Sidebar: FC<SidebarProps> = (props): JSX.Element => {
 
-  const { addBookToLibrary } = props;
+  const { addBookToFirebaseAndLibrary } = props;
 
   const [formToggle, setFormToggle] = useState({
     toggle: false,
@@ -132,7 +132,7 @@ const Sidebar: FC<SidebarProps> = (props): JSX.Element => {
       && authorEntry.validity.valid
       && pagesEntry.validity.valid
       ) {
-        addBookToLibrary(titleEntry.value, authorEntry.value, Number(pagesEntry.value));
+        addBookToFirebaseAndLibrary(titleEntry.value, authorEntry.value, Number(pagesEntry.value));
       };
   }
 

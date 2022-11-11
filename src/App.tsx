@@ -145,7 +145,7 @@ const App = (): JSX.Element | null => {
     return (
       <>
         <Header userStatus={userStatus} />
-        <Library />
+        <Library userStatus={userStatus} />
         <Footer />
       </>
     );
