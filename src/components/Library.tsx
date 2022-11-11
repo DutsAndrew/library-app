@@ -3,7 +3,14 @@ import uniqid from 'uniqid';
 import Sidebar from './Sidebar';
 import Page from './Page';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, collection, getDoc, getDocs, query } from 'firebase/firestore';
+import { getFirestore,
+  doc,
+  setDoc,
+  collection,
+  getDocs,
+  query,
+  deleteDoc
+} from 'firebase/firestore';
 
 interface userState {
   formCompleted: boolean,
@@ -49,8 +56,8 @@ const Library: FC<LibraryProps> = (props): JSX.Element => {
   useEffect(() => {    
     if (dbStatus.status === false) {
       // Get a list of books from database
-      getBooks(db);
-      async function getBooks(db: any): Promise<object> {
+      getBooksFromFirebase(db);
+      async function getBooksFromFirebase(db: any): Promise<object> {
         const libraryQuery = query(collection(db, 'library', userStatus.currentUser.uid, 'books'));
         const librarySnapshot = await getDocs(libraryQuery);
         const firebaseLibrary: any[] = []
@@ -70,6 +77,10 @@ const Library: FC<LibraryProps> = (props): JSX.Element => {
         });
         return librarySnapshot;
       };
+      setDbStatus({
+        status: true,
+        error: Error,
+      });
     };
   }, []);
 
@@ -122,7 +133,7 @@ const Library: FC<LibraryProps> = (props): JSX.Element => {
     await setDoc(bookRef, newBook);
   };
     
-  const changeReadStatus = (e: any): void => {
+  const changeReadStatus = async (e: any): Promise<void> => {
     const bookId = e.target.parentElement.id;
     const currentLibrary: any[] = library.library;
     currentLibrary.forEach((book: any) => {
@@ -132,11 +143,13 @@ const Library: FC<LibraryProps> = (props): JSX.Element => {
         setLibrary({
           library: [...currentLibrary],
         });
+        const bookRef = doc(db, "library", userStatus.currentUser.uid, "books", bookId);
+        setDoc(bookRef, { readIt: book.readIt }, { merge: true });
       };
     });
   };
 
-  const removeBook = (e: any): void => {
+  const removeBook = async (e: any): Promise<void> => {
     const bookId = e.target.parentElement.id;
     const currentLibrary: any[] = library.library;
     currentLibrary.forEach((book: any) => {
@@ -147,6 +160,7 @@ const Library: FC<LibraryProps> = (props): JSX.Element => {
         });
       };
     });
+    await deleteDoc(doc(db, "library", userStatus.currentUser.uid, "books", bookId));
   };
 
   return (
