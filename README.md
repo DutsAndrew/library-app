@@ -5,9 +5,13 @@ How To:
 2. Click the "+ Add Book" button to add a book to your library, this will open up a dropdown form
 3. Fill out the input forms on the left-hand sidebar and click "Add Book", your book will now be added to the library
 4. Each book will have a button at the bottom that can be toggled to change the "read" status of the book's in your library
-5. If you wan tto remove any books or if you have made a mistake you can click the "X" button at any time to remove a book that you have created.
+5. If you want to remove any books or if you have made a mistake you can click the "X" button at any time to remove a book that you have created.
 
-Design Process:
+New Update 11/11/22:
+
+Revisiting this project was fun. I gave a fresh update from basic HTML, CSS, and JS to React Typescript with Firebase as a backend. All "books" are saved to each user that creates an account. On the backend I have security features that only give users access to THEIR books. This being my first time experimenting with a backend, I'm excited to learn more and eventually get to NodeJS.
+
+Original Design Process 05/21/22:
 
 This project was a fun one. Getting the HTML and CSS setup so that I could see what I was working with didn't take long and is becoming more natural as I grow in my ability to code. I did hit a roadblock when transitioning into writing the JS for this project. I knew what I needed to do to get things working based on the studying that I had done building up to this project, but I was having a hard time figuring out exactly how I wanted to implement everything. I ended up just talking the assignment piece by piece and breaking it down into small chunks that I could play around with; and this is what helped me get everything working. 
 
