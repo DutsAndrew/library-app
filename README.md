@@ -9,7 +9,7 @@ How To:
 
 New Update 11/11/22:
 
-Revisiting this project was fun. I gave a fresh update from basic HTML, CSS, and JS to React Typescript with Firebase as a backend. All "books" are saved to each user that creates an account. On the backend I have security features that only give users access to THEIR books. This being my first time experimenting with a backend, I'm excited to learn more and eventually get to NodeJS.
+Revisiting this project was fun. I gave a fresh update from basic HTML, CSS, and JS to React Typescript with Firebase as a backend. All "books" are saved to each user that creates an account. On the backend I have security features that only give users access to THEIR books. This being my first time experimenting with a backend, I'm excited to learn more and eventually get to NodeJS. In addition, I wrote very extensive client-side form validation with RegEx and JS form checks.
 
 Original Design Process 05/21/22:
 
